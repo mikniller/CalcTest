@@ -40,14 +40,14 @@ const AmountWithYear =React.createClass({
   render : function() {
     return ( 
         <FormGroup >  
-        <Col  sm={2}>
+        <Col  sm={2} md={2} lg={2}>
             {this.props.index==0 ? 'Beløb' : ''}
         </Col>
-        <Col sm={3}>
+        <Col sm={3} md={3} lg={3}>
           <FormControl type="number" placeholder="Angiv år..." value={this.props.amountYear.year}
             onChange={this.handleYearChange}/>
         </Col>
-         <Col sm={4}>
+         <Col sm={5} md={5} lg={5} >
           <InputGroup>
           <FormControl type="number" placeholder="Angiv værdi.." value={this.props.amountYear.amount}
             onChange={this.handleAmountChange}/>

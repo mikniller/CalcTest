@@ -1,3 +1,5 @@
+
+
 export const setFrom = (year) => {
   return {
     type: 'SET_FROM',
@@ -64,3 +66,21 @@ export const setType = (CFFIType) => {
   
   }
 }
+
+
+
+
+export const toogleFetchStatus = (fetching) => {
+  return {
+    type: "TOGGLE_STATUS",
+    fetching
+  }
+}
+
+export const updateData = (data) => {
+  return {
+    type: "UPDATE_DATA",
+    data
+  }
+}
+

@@ -4,6 +4,7 @@ import YearInput from './YearInput';
 import AmountWithYearList from './AmountWithYearList';    
 import PrincipalInput from './PrincipalInput';
 import CFFITypeInput from './CFFITypeInput';
+import SubmitBtn from './SubmitBtn';
 import { Form } from 'react-bootstrap';
 
 
@@ -19,6 +20,7 @@ render() {
     <YearInput yearLabel="Til" isTo = "true"/>
     <PrincipalInput/>
     <AmountWithYearList/>
+    <SubmitBtn/>
     </Form>
     
     );

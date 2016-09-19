@@ -45,11 +45,12 @@
   },
   "dependencies": {
     "highcharts": "^4.2.6",
-    "highcstock": "^4.2.6",
+    "jquery": "^3.1.0",
     "react": "^0.14.6",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^0.14.6",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.0"
+    "redux": "^3.5.0",
+    "redux-thunk": "^2.1.0"
   }
 }

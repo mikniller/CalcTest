@@ -1,25 +1,3 @@
-export const testData = [
-     [Date.UTC(2016,1,1),100],
-    [Date.UTC(2017,1,1),200],
-    [Date.UTC(2018,1,1),6000],
-    [Date.UTC(2019,1,1),3000],
-    [Date.UTC(2020,1,1),1000],
-    [Date.UTC(2021,1,1),2000],
-    [Date.UTC(2022,1,1),1000],
-    [Date.UTC(2023,1,1),2000],
-    [Date.UTC(2024,1,1),4100],
-    [Date.UTC(2025,1,1),4200],
-    [Date.UTC(2026,1,1),4300],
-    ];
-
-export const testData2 = [
-    [Date.UTC(2016,1,1),1000],
-    [Date.UTC(2017,1,1),2000],
-    [Date.UTC(2018,1,1),1000],
-    [Date.UTC(2019,1,1),4000],
-    
-    
-    ];
 
 
 export const calculationData = {
@@ -31,11 +9,13 @@ export const calculationData = {
       interest:4,
       amountYears : [{amount:1000,year:2016, key:990},{amount:2000,year:2017, key:991}]
     },
-    data : testData
+    data : []
 }
 
+
+
 export default function yearReducer(state = {calculationData}, action) {
-  console.log(action);
+  
   var newState = state;
   switch (action.type) {
     case 'SET_FROM' :
@@ -49,7 +29,6 @@ export default function yearReducer(state = {calculationData}, action) {
      case 'SET_INTEREST' :
       newState = Object.assign({}, state);
       newState.calculationData.input.interest=action.interest;
-      newState.calculationData.data=testData2;
       break;  
      case 'SET_PRINCIPAL' :
       newState = Object.assign({}, state);
@@ -81,11 +60,25 @@ export default function yearReducer(state = {calculationData}, action) {
         newState = Object.assign({}, state);
         newState.calculationData.input.CFFIType=action.CFFIType;
         break;
+    case "UPDATE_DATA":
+
+       newState = Object.assign({}, state);
+       newState.calculationData.data = action.data;
+       var ret = [];
+        action.data.map(function(item) {
+          ret.push([Date.UTC(item.Year,1,1),item.Amount]);
+       });
+       newState.calculationData.data = ret;
+       break;        
   }
  /* console.log(newState);
   console.log(state);*/
 return newState;
 
 }
+
+
+
+
 
 

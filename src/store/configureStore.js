@@ -1,10 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk'
 import yearReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
 const enhancer = compose(
   // Middleware you want to use in development:
-  applyMiddleware(),
+  
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 

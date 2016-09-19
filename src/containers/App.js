@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import CompoundInputData from '../components/CompoundInputData';
 import Chart from '../components/Chart';    
+import TableData from '../components/TableData';
 
 import * as AllActions from '../actions';
 import { Panel,Row,Grid,Col,PageHeader,Button} from 'react-bootstrap';
@@ -44,7 +45,7 @@ class App extends Component {
          <Chart container="ChartDiv"  />
         </Panel>
         <Panel collapsible expanded={this.state.tableOpen}>
-            .......
+            <TableData/>
         </Panel>
 
 
