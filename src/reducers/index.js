@@ -9,7 +9,17 @@ export const calculationData = {
       interest:4,
       amountYears : [{amount:1000,year:2016, key:990},{amount:2000,year:2017, key:991}]
     },
-    data : []
+    data : [
+      [Date.UTC(2007,7,21),0.7429],
+      [Date.UTC(2007,7,22),0.7383],
+      [Date.UTC(2007,7,23),0.7369],
+      [Date.UTC(2007,7,24),0.7309],
+      [Date.UTC(2007,7,27),0.7329],
+      [Date.UTC(2007,7,28),0.7352],
+      [Date.UTC(2007,7,29),0.7311],
+      [Date.UTC(2007,7,30),0.7331],
+      [Date.UTC(2007,7,31),0.7337],
+    ]
 }
 
 

@@ -1,18 +1,22 @@
-import React from 'react';  
+import React, {Component} from 'react';  
 import { connect } from 'react-redux';
 import { setInterest } from '../actions'
 import { FormGroup,Col,FormControl } from 'react-bootstrap';
 
-const InterestInput = React.createClass({
+class InterestInput extends Component {
+  constructor(props) {
+     super(props);
+     this.handleInterestChange = this.handleInterestChange.bind(this);
+  }
   
-  handleInterestChange: function(e) {
+  handleInterestChange(e) {
     let val=e.target.value;
     if(val>100)val=100;
     if(val<0)val=0;
-
     this.props.setInterest(val);
-  },
-  render: function() {  
+  }
+
+  render() {  
     return (
        <FormGroup controlId="formHorizontalRente">
         <Col  sm={2}>
@@ -24,7 +28,7 @@ const InterestInput = React.createClass({
         </Col>
       </FormGroup>
      )}
-});
+};
 
 function mapStateToProps(state) {
   return {

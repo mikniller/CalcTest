@@ -19,19 +19,18 @@ function renderRows(testData) {
 
 
 
-const TableRow= React.createClass({
-    render: function() {
+class TableRow extends Component {
+    render() {
         return (
          <tr>
             <td>{this.props.year}</td>
             <td>{this.props.value}</td>
          </tr>);
     }
-  });
+  };
 
-
-const TableData= React.createClass({
-    render: function() {
+class TableData extends Component{
+    render() {
         const rows = renderRows(this.props.testData);
          return (
          <div>
@@ -47,16 +46,9 @@ const TableData= React.createClass({
           </tbody>
           </Table>
          </div>);
-        
     }
-  });
+};
  
-
-
-
-
-
-
 function mapStateToProps(state) {
   return {
    testData:state.calculationData.data

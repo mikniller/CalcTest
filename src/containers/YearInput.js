@@ -1,20 +1,30 @@
-import React from 'react';  
+import React, {Component} from 'react';  
 import { setFrom, setTo } from '../actions'
 import { connect } from 'react-redux'
 import { FormGroup,Col,FormControl } from 'react-bootstrap';
-const YearInput = React.createClass({
+
+class YearInput extends Component {
+  constructor(props) {
+     super(props);
+        this.state = {isFrom:props.isFrom  } 
+     this.getValue = this.getValue.bind(this);
+     this.handleYearChange = this.handleYearChange.bind(this);
   
-  getValue: function() {
-    return this.props.isFrom ? this.props.from :this.props.to 
-  },
-  handleYearChange: function(e) {
-      if (this.props.isFrom) 
+  }
+
+  getValue() {
+    return this.state.isFrom ? this.props.from :this.props.to 
+  }
+  
+  handleYearChange(e) {
+      if (this.state.isFrom) 
         this.props.setFrom(e.target.value);
       else this.props.setTo(e.target.value); 
-  },
-  render: function() {
+  }
+  
+  render() {
     return ( 
- <FormGroup controlId="formHorizontalYear">
+      <FormGroup controlId="formHorizontalYear">
         <Col  sm={2}>
           {this.props.yearLabel}
         </Col>
@@ -23,9 +33,9 @@ const YearInput = React.createClass({
             onChange={this.handleYearChange}/>
         </Col>
       </FormGroup>
-        );
-    }
-});
+     );
+  }
+};
 
 function mapStateToProps(state) {
   return {

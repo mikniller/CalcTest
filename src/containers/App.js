@@ -1,7 +1,7 @@
 import React, { Component,PropTypes } from 'react';  
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import CompoundInputData from '../components/CompoundInputData';
+import CompoundInputData from '../containers/CompoundInputData';
 import Chart from '../components/Chart';    
 import TableData from '../components/TableData';
 
@@ -12,14 +12,14 @@ import { Panel,Row,Grid,Col,PageHeader,Button} from 'react-bootstrap';
 class App extends Component {
    constructor(...args) {
       super(...args);
-      this.state = {
+      this.state = { 
         graphOpen: true,
         tableOpen:false
     };
   }
 
   
-  render() {
+  render() { 
     return (
     <Grid fluid>
       <Row className="show-grid">
@@ -42,7 +42,7 @@ class App extends Component {
         </Button>
 
         <Panel collapsible expanded={this.state.graphOpen}>
-         <Chart container="ChartDiv"  />
+         <Chart container="ChartDiv"  chartData={this.props.calculationData.data}/>
         </Panel>
         <Panel collapsible expanded={this.state.tableOpen}>
             <TableData/>

@@ -1,18 +1,24 @@
 import $ from 'jquery';
-import React from 'react';  
+import React,{ Component }  from 'react';  
 import { connect } from 'react-redux';
 import { toogleFetchStatus,updateData } from '../actions'
 import { Button } from 'react-bootstrap';
 
-const SubmitBtn = React.createClass({
-  
-  submit : function(e) {
-     var disp =this.props.dispatch; 
+class SubmitBtn extends Component{
+   constructor(props) {
+    super(props);
+    this.state = {input:props.input, dispatch:props.dispatch};
+    this.submit = this.submit.bind(this);
+  }
+
+
+  submit(e) {
+     var disp =this.state.dispatch; 
      disp(toogleFetchStatus(true));
      $.ajax({
         method: "POST",
         url: "http://localhost:54187/Api/Values",
-        data:this.props.input,
+        data:this.state.input,
         dataType: "json",
           done : function(result) {
           console.log(result);
@@ -26,16 +32,16 @@ const SubmitBtn = React.createClass({
             disp(toogleFetchStatus(false));
             disp(updateData(result));
           }});
-  },
+  }
   
   
-  render: function() {  
+  render() {  
     return (
       <Button onClick={this.submit} >
         Opdater
       </Button>
      )}
-});
+};
 
 function mapStateToProps(state) {
   return {
