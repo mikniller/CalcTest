@@ -21,23 +21,32 @@ function renderAmountYears(amountYears, setYear,setValue,addYearAmount,deleteYea
     else return [];
 }
 
-const AmountWithYear =React.createClass({  
-  handleYearChange : function(e) {
+class AmountWithYear extends Component {  
+  constructor(props) {
+     super(props);
+     this.handleYearChange = this.handleYearChange.bind(this);
+     this.handleAmountChange = this.handleAmountChange.bind(this);
+     this.add = this.add.bind(this);
+     this.delete = this.delete.bind(this);
+  }
+
+  handleYearChange(e) {
     this.props.setYear(e.target.value,this.props.index);
-  
-  },
-  handleAmountChange : function(e) {
+  }
+
+  handleAmountChange(e) {
     this.props.setValue(e.target.value,this.props.index);
-  },
-  add : function(e) {
+  }
+  
+  add(e) {
     this.props.addYearAmount();
-  },
-  delete : function(e) {
+  }
+  
+  delete(e) {
     this.props.deleteYearAmount(this.props.index);
-  },
-  
-  
-  render : function() {
+  }
+    
+  render() {
     return ( 
         <FormGroup >  
         <Col  sm={2} md={2} lg={2}>
@@ -66,21 +75,19 @@ const AmountWithYear =React.createClass({
       </FormGroup>
   )
     }
-});
+};
 
 
-const AmountWithYearList =React.createClass({  
+class AmountWithYearList extends Component {  
  render() {
-
         const ays = renderAmountYears(this.props.amountYears,this.props.setYear,this.props.setValue,this.props.addYearAmount,this.props.deleteYearAmount);
-
         return (
             <div   className={this.props.CFFIType!=2 ? 'hidden' : ''}>
                 { ays }
             </div>
         );
     }
-});
+};
 
 
 function mapStateToProps(state) {
