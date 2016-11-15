@@ -11,7 +11,7 @@ const SubmitBtn = React.createClass({
      disp(toogleFetchStatus(true));
      $.ajax({
         method: "POST",
-        url: "http://localhost:54187/Api/Values",
+        url: "http://Calculator.localhost/Api/Values",
         data:this.props.input,
         dataType: "json",
           done : function(result) {
@@ -30,10 +30,12 @@ const SubmitBtn = React.createClass({
   
   
   render: function() {  
+    this.submit();
     return (
       <Button onClick={this.submit} >
         Opdater
       </Button>
+      
      )}
 });
 

@@ -4,10 +4,10 @@ export const calculationData = {
     input : {
       CFFIType:1,
       from:2016,
-      to:2016,
+      to:2026,
       principal:1000,
       interest:4,
-      amountYears : [{amount:1000,year:2016, key:990},{amount:2000,year:2017, key:991}]
+      amountYears : [{amount:1000,year:2016, key:990},{amount:5000,year:2020, key:991}]
     },
     data : []
 }
