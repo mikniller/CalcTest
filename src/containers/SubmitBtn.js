@@ -1,8 +1,8 @@
 import $ from 'jquery';
-import React,{ Component }  from 'react';  
+import React,{ Component }  from 'react';
 import { connect } from 'react-redux';
 import { toogleFetchStatus,updateData } from '../actions'
-import { Button } from 'react-bootstrap';
+
 
 class SubmitBtn extends Component{
    constructor(props) {
@@ -12,7 +12,8 @@ class SubmitBtn extends Component{
   }
 
   submit(e) {
-     var disp =this.state.dispatch; 
+     e.preventDefault();
+     var disp =this.state.dispatch;
      disp(toogleFetchStatus(true));
      $.ajax({
         method: "POST",
@@ -21,7 +22,7 @@ class SubmitBtn extends Component{
         data:this.props.input,
         dataType: "json",
           done : function(result) {
-       
+
           disp(toogleFetchStatus(false));
           disp(updateData(result));
           },
@@ -33,15 +34,16 @@ class SubmitBtn extends Component{
             disp(updateData(result));
           }});
   }
-  
-  
-  render() {  
+
+
+  render() {
 
     return (
-      <Button onClick={this.submit} >
-        Opdater {this.props.input.CFFIType}
-      </Button>
-      
+
+      <button onClick={this.submit}
+         className='primary btn btn-primary'>
+          Opdater
+       </button>
      )}
 };
 
@@ -53,4 +55,3 @@ function mapStateToProps(state) {
 
 
 export default connect(mapStateToProps)(SubmitBtn);
-

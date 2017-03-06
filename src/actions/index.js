@@ -1,36 +1,36 @@
-
+import ActionTypes from '../constants/ActionTypes'
 
 export const setFrom = (year) => {
   return {
-    type: 'SET_FROM',
+  type:ActionTypes.SET_FROM,
     year
   }
 }
 
 export const setTo = (year) => {
   return {
-    type: 'SET_TO',
+  type:ActionTypes.SET_TO,
     year
   }
 }
 
 export const setInterest = (interest) => {
   return {
-    type: 'SET_INTEREST',
+  type:ActionTypes.SET_INTEREST,
     interest
   }
 }
 
 export const setPrincipal = (principal) => {
   return {
-    type: 'SET_PRINCIPAL',
+  type:ActionTypes.SET_PRINCIPAL,
     principal
   }
 }
 
 export const setAmountYearYear = (year,index) => {
   return {
-    type: 'SET_AMOUNTYEAR_YEAR',
+  type:ActionTypes.SET_AMOUNTYEAR_YEAR,
     year,
     index
   }
@@ -38,32 +38,32 @@ export const setAmountYearYear = (year,index) => {
 
 export const setAmountYearValue = (amount,index) => {
   return {
-    type: 'SET_AMOUNTYEAR_VALUE',
+  type:ActionTypes.SET_AMOUNTYEAR_VALUE,
     amount,
     index
-  
+
   }
 }
 
 export const addYearAmount = () => {
   return {
-    type: 'ADD_AMOUNTYEAR'
+  type:ActionTypes.ADD_AMOUNTYEAR
   }
 }
 
 export const deleteYearAmount = (index) => {
   return {
-    type: 'DELETE_AMOUNTYEAR',
+  type:ActionTypes.DELETE_AMOUNTYEAR,
     index
-  
+
   }
 }
 
 export const setType = (CFFIType) => {
   return {
-    type: 'SET_TYPE',
+  type:ActionTypes.SET_TYPE,
     CFFIType
-  
+
   }
 }
 
@@ -72,15 +72,14 @@ export const setType = (CFFIType) => {
 
 export const toogleFetchStatus = (fetching) => {
   return {
-    type: "TOGGLE_STATUS",
+  type:ActionTypes.TOGGLE_STATUS,
     fetching
   }
 }
 
 export const updateData = (data) => {
   return {
-    type: "UPDATE_DATA",
+  type:ActionTypes.UPDATE_DATA,
     data
   }
 }
-

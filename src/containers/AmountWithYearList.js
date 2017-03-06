@@ -1,112 +1,95 @@
-import React, { Component } from 'react';  
-import { connect } from 'react-redux';
-import { Button,Glyphicon } from 'react-bootstrap';
-import {setAmountYearYear, setAmountYearValue,addYearAmount,deleteYearAmount} from '../actions'
-import { FormGroup,Col,FormControl,InputGroup } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {setAmountYearYear, setAmountYearValue, addYearAmount, deleteYearAmount} from '../actions'
 
-function renderAmountYears(amountYears, setYear,setValue,addYearAmount,deleteYearAmount) {
-    if (amountYears.length > 0) {   
-        return amountYears.map((ay, index) => (
-            <AmountWithYear key={ay.key} 
-              index={index} 
-              amountYear={ay} 
-              setYear={setYear} 
-              setValue={setValue} 
-              addYearAmount={addYearAmount}
-              deleteYearAmount={deleteYearAmount}
-              length={amountYears.length}
-              />
-        ));
+function renderAmountYears(amountYears, setYear, setValue, addYearAmount, deleteYearAmount,cffiType) {
+    if (amountYears.length > 0) {
+        return amountYears.map((ay, index) => (<AmountWithYear CFFIType={cffiType} key={ay.key} index={index} amountYear={ay} setYear={setYear} setValue={setValue} addYearAmount={addYearAmount} deleteYearAmount={deleteYearAmount} length={amountYears.length}/>));
+    } else
+        return [];
     }
-    else return [];
-}
 
-class AmountWithYear extends Component {  
-  constructor(props) {
-     super(props);
-     this.handleYearChange = this.handleYearChange.bind(this);
-     this.handleAmountChange = this.handleAmountChange.bind(this);
-     this.add = this.add.bind(this);
-     this.delete = this.delete.bind(this);
-  }
+class AmountWithYear extends Component {
+    constructor(props) {
+        super(props);
+        this.handleYearChange = this.handleYearChange.bind(this);
+        this.handleAmountChange = this.handleAmountChange.bind(this);
+        this.add = this.add.bind(this);
+        this.delete = this.delete.bind(this);
+    }
 
-  handleYearChange(e) {
-    this.props.setYear(e.target.value,this.props.index);
-  }
+    handleYearChange(e) {
+        this.props.setYear(e.target.value, this.props.index);
+    }
 
-  handleAmountChange(e) {
-    this.props.setValue(e.target.value,this.props.index);
-  }
-  
-  add(e) {
-    this.props.addYearAmount();
-  }
-  
-  delete(e) {
-    this.props.deleteYearAmount(this.props.index);
-  }
-    
-  render() {
-    return ( 
-        <FormGroup >  
-        <Col  sm={2} md={2} lg={2}>
-            {this.props.index==0 ? 'Beløb' : ''}
-        </Col>
-        <Col sm={3} md={3} lg={3}>
-          <FormControl type="number" placeholder="Angiv år..." value={this.props.amountYear.year}
-            onChange={this.handleYearChange}/>
-        </Col>
-         <Col sm={5} md={5} lg={5} >
-          <InputGroup>
-          <FormControl type="number" placeholder="Angiv værdi.." value={this.props.amountYear.amount}
-            onChange={this.handleAmountChange}/>
-          <InputGroup.Addon>
-            <Button bsStyle="warning" bsSize="xsmall" onClick={this.delete} disabled={this.props.index==0}> 
-               <Glyphicon glyph="minus" /> 
-              </Button>
-              
-               <Button bsStyle="primary" bsSize="xsmall" onClick={this.add} disabled={this.props.length-1!=this.props.index }> 
-               <Glyphicon glyph="plus" /> 
-              </Button>
-              </InputGroup.Addon>
-               </InputGroup>
+    handleAmountChange(e) {
+        this.props.setValue(e.target.value, this.props.index);
+    }
 
-        </Col>
-      </FormGroup>
-  )
+    add(e) {
+        this.props.addYearAmount();
+    }
+
+    delete(e) {
+        this.props.deleteYearAmount(this.props.index);
+    }
+
+    render() {
+        return (
+            <div className="form-group">
+                <div className="col-lg-2 col-md-2 col-sm-2">
+                    {this.props.index == 0 ? this.props.CFFIType.Instalment : ''}
+                </div>
+                <div className="col-lg-3 col-md-3 col-sm-3">
+                    <input placeholder="Angiv år..." value="2016" type="number" className="form-control" value={this.props.amountYear.year} onChange={this.handleYearChange}/></div>
+                <div className="col-lg-5 col-md-5 col-sm-5">
+                    <span className="input-group">
+                        <input placeholder="Angiv værdi.." value="1000" type="number" className="form-control" value={this.props.amountYear.amount} onChange={this.handleAmountChange}/>
+                        <span className="input-group-addon">
+                            <button type="button" className="btn btn-xs btn-warning" onClick={this.delete} disabled={this.props.index == 0}>
+                                <span className="glyphicon glyphicon-minus"></span>
+                            </button>
+                            <button type="button" className="btn btn-xs btn-primary" onClick={this.add} disabled={this.props.length - 1 != this.props.index}>
+                                <span className="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        )
     }
 };
 
-
-class AmountWithYearList extends Component {  
- render() {
-        const ays = renderAmountYears(this.props.amountYears,this.props.setYear,this.props.setValue,this.props.addYearAmount,this.props.deleteYearAmount);
+class AmountWithYearList extends Component {
+    render() {
+        const ays = renderAmountYears(this.props.amountYears, this.props.setYear, this.props.setValue, this.props.addYearAmount, this.props.deleteYearAmount,this.props.CFFIType);
         return (
-            <div   className={this.props.CFFIType==1 ? 'hidden' : ''}>
-                { ays }
+            <div >
+                {ays}
             </div>
         );
     }
 };
 
-
 function mapStateToProps(state) {
-  return {
-   amountYears:state.input.amountYears,
-   CFFIType:state.input.CFFIType
-  };
+    return {amountYears: state.input.amountYears,CFFIType: state.selectedCffi};
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    setYear: function(year,index) { dispatch(setAmountYearYear(year,index))},
-    setValue: function(value,index) { dispatch(setAmountYearValue(value,index))},
-    addYearAmount: function() { dispatch(addYearAmount())},
-    deleteYearAmount: function(index) { dispatch(deleteYearAmount(index))},
-  };
+    return {
+        setYear: function(year, index) {
+            dispatch(setAmountYearYear(year, index))
+        },
+        setValue: function(value, index) {
+            dispatch(setAmountYearValue(value, index))
+        },
+        addYearAmount: function() {
+            dispatch(addYearAmount())
+        },
+        deleteYearAmount: function(index) {
+            dispatch(deleteYearAmount(index))
+        }
+    }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AmountWithYearList);
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(AmountWithYearList);

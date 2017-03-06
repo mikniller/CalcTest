@@ -3,16 +3,17 @@ import {connect} from 'react-redux';
 import HeaderNavigation from './HeaderNavigation';
 import CompoundInputData from '../containers/CompoundInputData';
 import Chart from '../components/Chart';
+import StockChart from '../components/StockChart';
 import TableData from '../components/TableData';
-import { Panel,Row,Grid,Col,PageHeader,Button} from 'react-bootstrap';
+
 
 class MainLayout extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-        graphOpen: true,
-        tableOpen:false
-    };
+        this.state = {
+            graphOpen: true,
+            tableOpen: false
+        };
     }
 
     render() {
@@ -23,7 +24,7 @@ class MainLayout extends React.Component {
                     <div className="row">
                         <div className="col-md-6">
                             <div className="panel panel-default">
-                                <div className="panel-heading">Input</div>
+                                <div className="panel-heading panel-heading-custom">Input</div>
                                 <div className="panel-body">
                                     <CompoundInputData/>
                                 </div>
@@ -32,35 +33,36 @@ class MainLayout extends React.Component {
                         <div className="col-md-6">
 
                             <div className="panel panel-default">
-                                <div className="panel-heading">Resultat</div>
-                                <div className="panel-body">
-                                    <Button
-                                        bsStyle={this.state.graphOpen
-                                        ? 'primary'
-                                        : 'default'}
-                                        onClick={() => this.setState({
-                                        graphOpen: !this.state.graphOpen,
-                                        tableOpen: this.state.graphOpen
-                                    })}>
-                                        Graph
-                                    </Button>
-                                    <Button
-                                        bsStyle={this.state.tableOpen
-                                        ? 'primary'
-                                        : 'default'}
-                                        onClick={() => this.setState({
+                                <div className="panel-heading panel-heading-custom">Resultat
+
+                                    <button onClick={() => this.setState({
                                         tableOpen: !this.state.tableOpen,
                                         graphOpen: this.state.tableOpen
-                                    })}>
-                                        Tabel
-                                    </Button>
+                                    })} className={this.state.tableOpen
+                                        ? 'primary btn btn-primary btn-sm pull-right'
+                                        : 'default btn btn-default btn-sm pull-right'}>Tabel</button>
+                                    <button onClick={() => this.setState({
+                                        graphOpen: !this.state.graphOpen,
+                                        tableOpen: this.state.graphOpen
+                                    })} className={this.state.graphOpen
+                                        ? 'primary btn btn-primary btn-sm pull-right'
+                                        : 'default btn btn-default btn-sm pull-right'}>Graph</button>
 
-                                    <Panel collapsible expanded={this.state.graphOpen}>
-                                        <Chart container="ChartDiv" chartData={this.props.calculationData.data}/>
-                                    </Panel>
-                                    <Panel collapsible expanded={this.state.tableOpen}>
+                                </div>
+                                <div className="panel-body">
+
+                                    <div className={this.state.tableOpen
+                                        ? 'collapse in'
+                                        : 'collapse'}>
                                         <TableData/>
-                                    </Panel>
+                                    </div>
+
+                                    <div className={this.state.graphOpen
+                                        ? 'collapse in'
+                                        : 'collapse'}>
+                                        <StockChart container="ChartDiv" selCFFI={this.props.calculationData.selectedCffi} chartData={this.props.calculationData.data}/>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -69,10 +71,10 @@ class MainLayout extends React.Component {
                 </div>
                 <hr/>
                 <footer className="footer">
-                <div className="container">
-                    <span className="text-muted">Schantz A/S 2017</span>
-                </div>
-                    
+                    <div className="container">
+                        <span className="text-muted">Schantz A/S 2017</span>
+                    </div>
+
                 </footer>
             </div>
         );

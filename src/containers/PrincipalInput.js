@@ -1,41 +1,40 @@
-import React,{ Component }  from 'react';  
-import { setPrincipal } from '../actions'
-import { connect } from 'react-redux'
-import { FormGroup,Col,FormControl } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {setPrincipal} from '../actions'
+import {connect} from 'react-redux'
 
-class PrincipalInput extends Component {  
-  constructor(props) {
-    super(props);
-     this.handleChange = this.handleChange.bind(this);
-  }
-  
-  handleChange(e) {
-    this.props.setPrincipal(e.target.value)
-  }
+class PrincipalInput extends Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
 
-  render() {
-    return (
-      <FormGroup> 
-        <Col  sm={2}>
-            Hovedstol
-        </Col>
-        <Col sm={4}>
-          <FormControl type="number" placeholder="beløb" value={this.props.principal}
-            onChange={this.handleChange}/>
-        </Col>
-      </FormGroup>);
+    handleChange(e) {
+        this.props.setPrincipal(e.target.value)
+    }
+
+    render() {
+        const {CFFIType} = this.props;
+        return (
+            <div className="form-group">
+                <div className="col-sm-2">{CFFIType.Principal}</div>
+                <div className="col-sm-4">
+                    <input placeholder="år" value={this.props.principal} onChange={this.handleChange} type="number" id="formHorizontalPrincipal" className="form-control"/>
+                </div>
+            </div>
+        );
     }
 };
 
 function mapStateToProps(state) {
-  return { principal:state.input.principal };
+    return {principal: state.input.principal, CFFIType: state.selectedCffi};
 }
 
 function mapDispatchToProps(dispatch) {
-  return { setPrincipal: function(val) { 
-            dispatch(setPrincipal(val)); }
-        };
-} 
+    return {
+        setPrincipal: function(val) {
+            dispatch(setPrincipal(val));
+        }
+    };
+}
 
-export default connect(mapStateToProps,mapDispatchToProps)(PrincipalInput);
-
+export default connect(mapStateToProps, mapDispatchToProps)(PrincipalInput);

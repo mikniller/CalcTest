@@ -1,14 +1,13 @@
-import React, {Component} from 'react';  
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { setInterest } from '../actions'
-import { FormGroup,Col,FormControl } from 'react-bootstrap';
 
 class InterestInput extends Component {
   constructor(props) {
      super(props);
      this.handleInterestChange = this.handleInterestChange.bind(this);
   }
-  
+
   handleInterestChange(e) {
     let val=e.target.value;
     if(val>100)val=100;
@@ -16,23 +15,21 @@ class InterestInput extends Component {
     this.props.setInterest(val);
   }
 
-  render() {  
+  render() {
     return (
-       <FormGroup controlId="formHorizontalRente">
-        <Col  sm={2}>
-          Rente
-        </Col>
-        <Col sm={4}>
-          <FormControl type="number" placeholder="rente" value={this.props.interest}
-            onChange={this.handleInterestChange}/>
-        </Col>
-      </FormGroup>
+      <div className="form-group">
+          <div className="col-sm-2">{this.props.CFFIType.Interest}</div>
+          <div className="col-sm-4">
+              <input placeholder="år" value={this.props.interest} onChange={this.handleInterestChange} type="number" id="formHorizontalRente" className="form-control"/>
+          </div>
+      </div>
      )}
 };
 
 function mapStateToProps(state) {
   return {
-   interest:state.input.interest
+   interest:state.input.interest,
+   CFFIType:state.selectedCffi
   };
 }
 
@@ -45,4 +42,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(InterestInput);
-

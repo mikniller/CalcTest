@@ -1,47 +1,52 @@
-import React, { Component } from 'react';  
-import { FormGroup,Col,FormControl } from 'react-bootstrap';
-import { connect } from 'react-redux'
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
 
 class CFFITypeInput extends Component {
-  constructor(props) {
-     super(props);
-     this.handleChange = this.handleChange.bind(this);
-     this.state = {CFFIType:props.CFFIType, setType:props.setType  }
-  }
-  
-  handleChange(e) {
-    this.state.setType(e.target.value)
-  }
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            CFFIType: props.CFFIType,
+            setType: props.setType
+        }
+    }
 
-  render() {
-    return (
-        <FormGroup> 
-        <Col  sm={2}>
-            Type
-        </Col>
-        <Col sm={6}>
-          <FormControl componentClass="select" placeholder="CFFI type"  onChange={this.handleChange} value={this.props.cffiType}>
-            <option value="1">Indtægter</option>
-            <option value="2">Formue med opsparing</option>
-            <option value="3">Lån</option>
-          </FormControl>
-        </Col>
-      </FormGroup>
+    handleChange(e) {
+        this.state.setType(e.target.value)
+    }
+
+    render() {
+        return (
+          <div className = "form-group" >
+            <div className="col-sm-2" >Type</div>
+            <div className = "col-sm-6">
+              <select placeholder="CFFI type" className="form-control" onChange={this.handleChange} value={this.props.cffiType}>
+              <option value="1">Indtægter</option>
+              <option value="2">Formue med opsparing</option>
+              <option value="3">AnnuitetsLån</option>
+          </select></div></div >
+
+
+
         );
     }
 };
 
-
 function mapStateToProps(state) {
-  return {
-   cffiType : state.input.CFFIType
-  };
+    return {cffiType: state.input.CFFIType};
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-  };
+    return {};
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(CFFITypeInput);
+export default connect(mapStateToProps, mapDispatchToProps)(CFFITypeInput);
 
+<div className = "form-group" >
+  <div className="col-sm-2" >Type</div>
+  <div className = "col-sm-6">
+    <select placeholder="CFFI type" className="form-control">
+    <option selected="" value="1">Indtægter</option>
+    <option value="2">Formue med opsparing</option>
+    <option value="3">Lån</option>
+</select></div></div >

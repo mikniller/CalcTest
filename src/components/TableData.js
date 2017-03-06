@@ -1,24 +1,24 @@
-import React, { Component } from 'react';  
+import React, { Component } from 'react';
 import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import { testData } from '../reducers';
 import { Table } from 'react-bootstrap';
 
-function renderRows(testData) {
-    if (testData.length > 0) {   
+function renderRows(testData,hideInstalment) {
+    if (testData.length > 0) {
         return testData.map((td, index) => (
-            <TableRow key={index} 
-              index={index} 
+            <TableRow key={index}
+              index={index}
               year={new Date(td[0]).getFullYear()}
-              value={td[1]} 
-              interest={td[2]} 
+              value={td[1].toFixed(2)}
+              interest={td[2].toFixed(2)}
+              instalment={td[3].toFixed(2)}
+              showInstalment={hideInstalment}
               />
         ));
     }
     else return [];
 }
-
-
 
 class TableRow extends Component {
     render() {
@@ -27,34 +27,39 @@ class TableRow extends Component {
             <td>{this.props.year}</td>
             <td>{this.props.value}</td>
             <td>{this.props.interest}</td>
+              { this.props.showInstalment && <td>{this.props.instalment}</td> }
+
          </tr>);
     }
   };
 
 class TableData extends Component{
     render() {
-        const rows = renderRows(this.props.testData);
+        const rows = renderRows(this.props.testData,this.props.CFFIType.AmountWithYearVisible);
+        const {CFFIType} = this.props;
          return (
          <div>
          <Table striped bordered condensed hover>
             <thead>
                 <tr>
                     <th>År</th>
-                    <th>Hovedstol</th>
-                    <th>Rente</th>
+                    <th>{CFFIType.Principal}</th>
+                    <th>{CFFIType.Interest}</th>
+                    { this.props.CFFIType.AmountWithYearVisible && <th>{CFFIType.Instalment}</th> }
                 </tr>
             </thead>
-            <tbody>    
+            <tbody>
           { rows }
           </tbody>
           </Table>
          </div>);
     }
 };
- 
+
 function mapStateToProps(state) {
   return {
-   testData:state.data
+   testData:state.data,
+   CFFIType:state.selectedCffi
   };
 }
 

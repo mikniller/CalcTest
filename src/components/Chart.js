@@ -1,10 +1,7 @@
-import React, { Component } from 'react';  
+import React, { Component } from 'react';
  import ReactDOM  from 'react-dom';
 import { connect } from 'react-redux';
 import Highcharts from 'highcharts';
-import HighStock from 'highcharts/highstock';
-import Funnel from 'highcharts/modules/funnel';
-import { testData } from '../reducers';
 
 export default class Chart extends Component{
   constructor(props) {
@@ -16,12 +13,12 @@ export default class Chart extends Component{
       // Extend Highcharts with modules
       // Set container which the chart should render to.
         option2.series[0].data=this.props.chartData;
-        this.chart = new HighStock.StockChart(
-            this.props.container, 
+        this.chart = new Highcharts.Chart(
+            this.props.container,
             option2
         );
     }
-   
+
      // Set container which the chart should render to.
     //Destroy chart before unmount.
     componentWillUnmount() {
@@ -36,9 +33,9 @@ export default class Chart extends Component{
       return React.createElement('div', { id: this.props.container });
     }
   };
- 
+
 var option2 = {
-    chart : { animation:false },
+    chart : { animation:false,type: 'area' },
     rangeSelector: {
       selected: 0,
       buttons: [{
