@@ -22,7 +22,7 @@ export default class CFFITypeInput extends Component {
           <FormControl componentClass="select" placeholder="CFFI type"  onChange={this.handleChange} value={this.state.CFFIType}>
             <option value="1">Indtægter</option>
             <option value="2">Formue med opsparing</option>
-            <option value="3">Fynske bank Indtægter</option>
+            <option value="3">Lån</option>
           </FormControl>
         </Col>
       </FormGroup>

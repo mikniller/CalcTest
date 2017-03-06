@@ -82,7 +82,7 @@ class AmountWithYearList extends Component {
  render() {
         const ays = renderAmountYears(this.props.amountYears,this.props.setYear,this.props.setValue,this.props.addYearAmount,this.props.deleteYearAmount);
         return (
-            <div   className={this.props.CFFIType!=2 ? 'hidden' : ''}>
+            <div   className={this.props.CFFIType==1 ? 'hidden' : ''}>
                 { ays }
             </div>
         );

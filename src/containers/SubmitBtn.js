@@ -11,13 +11,13 @@ class SubmitBtn extends Component{
     this.submit = this.submit.bind(this);
   }
 
-
   submit(e) {
      var disp =this.state.dispatch; 
      disp(toogleFetchStatus(true));
      $.ajax({
         method: "POST",
-        url: "http://Calculator.localhost/Api/Values",
+        // url: "http://Calculator.localhost/Api/Values",
+        url: "http://localhost:54187/Api/Values",
         data:this.state.input,
         dataType: "json",
           done : function(result) {
