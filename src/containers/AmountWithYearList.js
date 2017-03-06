@@ -92,8 +92,8 @@ class AmountWithYearList extends Component {
 
 function mapStateToProps(state) {
   return {
-   amountYears:state.calculationData.input.amountYears,
-   CFFIType:state.calculationData.input.CFFIType
+   amountYears:state.input.amountYears,
+   CFFIType:state.input.CFFIType
   };
 }
 

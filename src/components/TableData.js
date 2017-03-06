@@ -11,6 +11,7 @@ function renderRows(testData) {
               index={index} 
               year={new Date(td[0]).getFullYear()}
               value={td[1]} 
+              interest={td[2]} 
               />
         ));
     }
@@ -25,6 +26,7 @@ class TableRow extends Component {
          <tr>
             <td>{this.props.year}</td>
             <td>{this.props.value}</td>
+            <td>{this.props.interest}</td>
          </tr>);
     }
   };
@@ -37,8 +39,9 @@ class TableData extends Component{
          <Table striped bordered condensed hover>
             <thead>
                 <tr>
-                    <th>Tidspunkt</th>
-                    <th>Værdi</th>
+                    <th>År</th>
+                    <th>Hovedstol</th>
+                    <th>Rente</th>
                 </tr>
             </thead>
             <tbody>    
@@ -51,7 +54,7 @@ class TableData extends Component{
  
 function mapStateToProps(state) {
   return {
-   testData:state.calculationData.data
+   testData:state.data
   };
 }
 

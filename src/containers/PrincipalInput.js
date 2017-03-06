@@ -28,7 +28,7 @@ class PrincipalInput extends Component {
 };
 
 function mapStateToProps(state) {
-  return { principal:state.calculationData.input.principal };
+  return { principal:state.input.principal };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -68,7 +68,7 @@ App.propTypes = {
 function mapStateToProps(state) {
 
   return {
-   calculationData:state.calculationData
+   calculationData:state
   };
 }
 

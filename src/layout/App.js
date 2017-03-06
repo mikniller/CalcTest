@@ -9,7 +9,10 @@ import * as AllActions from '../actions';
 
 
 class App extends Component {
-   
+    constructor(props) {
+     super(props);
+    }
+
   render() { 
     return (
       <div id="wrapper">
@@ -26,7 +29,7 @@ App.propTypes = {
 function mapStateToProps(state) {
 
   return {
-   calculationData:state.calculationData
+   calculationData:state
   };
 }
 

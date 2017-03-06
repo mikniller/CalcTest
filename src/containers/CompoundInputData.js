@@ -21,23 +21,24 @@ import { setType } from '../actions'
   }
 
   render() {
+    
     return ( 
-        <Form horizontal>
-          <CFFITypeInput setType={this.setCFFIType} CFFIType={this.props.input.CFFIType}/>
+        <form className="form-horizontal">
+          <CFFITypeInput setType={this.setCFFIType} CFFIType={this.props.calcData.input.CFFIType}/>
           <InterestInput/>
           <YearInput yearLabel="Fra" isFrom = "true" /> 
           <YearInput yearLabel="Til" isTo = "true"/>
           <PrincipalInput/>
           <AmountWithYearList/>
           <SubmitBtn />
-       </Form>
+       </form>
     );
     }
 }
 
 function mapStateToProps(state) {
   return {
-   input : state.calculationData.input
+   calcData : state
   };
 }
 

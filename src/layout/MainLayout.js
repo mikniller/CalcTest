@@ -1,76 +1,91 @@
-import React, { Component,PropTypes } from 'react';  
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import HeaderNavigation from './HeaderNavigation';
-import IncomeInput from "../containers/IncomeInput"
-import { Modal, ModalManager, Effect } from 'react-dynamic-modal';
-import Chart from '../components/chart';
+import CompoundInputData from '../containers/CompoundInputData';
+import Chart from '../components/Chart';
 import TableData from '../components/TableData';
+import { Panel,Row,Grid,Col,PageHeader,Button} from 'react-bootstrap';
 
 class MainLayout extends React.Component {
-    constructor(...args) {
-        super(...args);
-    }
-
-    openModal() {
-        ModalManager.open(<IncomeInput text="halløj" onRequestClose={() => true} panelType="panel-primary" />);
+    constructor(props) {
+        super(props);
+        this.state = { 
+        graphOpen: true,
+        tableOpen:false
+    };
     }
 
     render() {
         return (
             <div>
-                <HeaderNavigation />
-                <div className="container">
-                    <div className="row content">
-                    <div className="col-sm-4 col-md-4 chartabs">
-                       <ul className="nav nav-pills">
-                                <li className="active">
-                                    <a href="#0a" data-toggle="tab">Input</a>
-                                </li>
-                            </ul>
-                            <div className="tab-content clearfix">
-                                <div className="tab-pane active" id="0a">
-                                        
-                                </div>
-                            </div>
-
-
-                    </div>
-                        <div className="col-sm-8 col-md-8 chartabs">
-                            <ul className="nav nav-pills">
-                                <li className="active">
-                                    <a href="#1a" data-toggle="tab">Graph</a>
-                                </li>
-                                <li>
-                                    <a href="#2a" data-toggle="tab">Table</a>
-                                </li>
-                            </ul>
-                            <div className="tab-content clearfix">
-                                <div className="tab-pane active" id="1a">
-                                        <Chart container="ChartDiv"  chartData={this.props.calculationData.data}/>
-                                </div>
-                                <div className="tab-pane" id="2a">
-                                      <TableData tableData={this.props.calculationData.data}/>
+                <HeaderNavigation/>
+                <div className="container body-content">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">Input</div>
+                                <div className="panel-body">
+                                    <CompoundInputData/>
                                 </div>
                             </div>
                         </div>
+                        <div className="col-md-6">
+
+                            <div className="panel panel-default">
+                                <div className="panel-heading">Resultat</div>
+                                <div className="panel-body">
+                                    <Button
+                                        bsStyle={this.state.graphOpen
+                                        ? 'primary'
+                                        : 'default'}
+                                        onClick={() => this.setState({
+                                        graphOpen: !this.state.graphOpen,
+                                        tableOpen: this.state.graphOpen
+                                    })}>
+                                        Graph
+                                    </Button>
+                                    <Button
+                                        bsStyle={this.state.tableOpen
+                                        ? 'primary'
+                                        : 'default'}
+                                        onClick={() => this.setState({
+                                        tableOpen: !this.state.tableOpen,
+                                        graphOpen: this.state.tableOpen
+                                    })}>
+                                        Tabel
+                                    </Button>
+
+                                    <Panel collapsible expanded={this.state.graphOpen}>
+                                        <Chart container="ChartDiv" chartData={this.props.calculationData.data}/>
+                                    </Panel>
+                                    <Panel collapsible expanded={this.state.tableOpen}>
+                                        <TableData/>
+                                    </Panel>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+                <hr/>
+                <footer className="footer">
+                <div className="container">
+                    <span className="text-muted">Schantz A/S 2017</span>
+                </div>
+                    
+                </footer>
             </div>
         );
     }
 }
 
 MainLayout.propTypes = {
-  calculationData:PropTypes.object.isRequired
+    calculationData: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
 
-  return {
-   calculationData:state.calculationData
-  };
+    return {calculationData: state};
 }
-
-
 
 export default connect(mapStateToProps)(MainLayout);

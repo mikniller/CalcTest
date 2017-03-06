@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap';
 class SubmitBtn extends Component{
    constructor(props) {
     super(props);
-    this.state = {input:props.input, dispatch:props.dispatch};
+    this.state = {dispatch:props.dispatch};
     this.submit = this.submit.bind(this);
   }
 
@@ -18,10 +18,10 @@ class SubmitBtn extends Component{
         method: "POST",
         // url: "http://Calculator.localhost/Api/Values",
         url: "http://localhost:54187/Api/Values",
-        data:this.state.input,
+        data:this.props.input,
         dataType: "json",
           done : function(result) {
-          console.log(result);
+       
           disp(toogleFetchStatus(false));
           disp(updateData(result));
           },
@@ -36,10 +36,10 @@ class SubmitBtn extends Component{
   
   
   render() {  
-    this.submit();
+
     return (
       <Button onClick={this.submit} >
-        Opdater
+        Opdater {this.props.input.CFFIType}
       </Button>
       
      )}
@@ -47,7 +47,7 @@ class SubmitBtn extends Component{
 
 function mapStateToProps(state) {
   return {
-   input:state.calculationData.input
+   input:state.input
   };
 }
 

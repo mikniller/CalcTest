@@ -1,15 +1,8 @@
 import React, {Component}  from 'react';
-import { Navbar,Nav,NavItem,Button,FormControl} from 'react-bootstrap';
-import { Modal,ModalManager,Effect} from 'react-dynamic-modal';
-import IncomeInput from "../containers/IncomeInput"
-
 
 export default class HeaderNavigation extends React.Component {
 
-  openModal(){
-       ModalManager.open(<IncomeInput text="halløj" onRequestClose={() => true}  panelType="panel-primary"/>);
-    }
-
+ 
   render() {
     return (
 <nav className="navbar navbar-inverse">
@@ -17,17 +10,12 @@ export default class HeaderNavigation extends React.Component {
     <div className="navbar-header">
       <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span className="icon-bar"></span>
-        <span className="icon-bar"></span>
-        <span className="icon-bar"></span>                        
       </button>
-      <a className="navbar-brand" href="#">Logo</a>
+      <a className="navbar-brand" href="#"><img src="./src/schantz_logo_large.gif" height="20" width="120" /></a>
     </div>
     <div className="collapse navbar-collapse" id="myNavbar">
-      <ul className="nav navbar-nav">
-        <li className="active"><a href="#">Home</a></li>
-        <li className=""><a href="#">Graf</a></li>
-        <li className=""><a href="#">Tabel</a></li>
-      </ul>
+      <p className="nav navbar-text">Modulariseret beregningskerne test app</p>
+
     </div>
   </div>
 </nav>

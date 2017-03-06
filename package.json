@@ -1,10 +1,11 @@
 {
-  "name": "react-hot-boilerplate",
+  "name": "ESDemoApp",
   "version": "1.0.0",
-  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "description": "Demo app for Economic Suite modules",
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "pack1":"webpack -w "
   },
   "repository": {
     "type": "git",
@@ -21,12 +22,12 @@
     "edit",
     "webpack"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
-  "license": "MIT",
+  "author": "ES - Mini (template from Dan Abranov)",
+  "license": "",
   "bugs": {
-    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
+  "homepage": "",
   "devDependencies": {
     "babel-core": "^6.0.20",
     "babel-eslint": "^4.1.3",

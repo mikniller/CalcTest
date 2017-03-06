@@ -32,7 +32,7 @@ class InterestInput extends Component {
 
 function mapStateToProps(state) {
   return {
-   interest:state.calculationData.input.interest
+   interest:state.input.interest
   };
 }
 

@@ -39,8 +39,8 @@ class YearInput extends Component {
 
 function mapStateToProps(state) {
   return {
-   from:state.calculationData.input.from,
-   to:state.calculationData.input.to
+   from:state.input.from,
+   to:state.input.to
   };
 }
 
