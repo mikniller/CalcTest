@@ -11,10 +11,3 @@ export default {
  TOGGLE_STATUS : 'TOGGLE_STATUS',
  UPDATE_DATA : 'UPDATE_DATA'
 }
-
-
-const CFFIConstants = [
-  { Id:1, AmountWithYearVisible : false,   Principal : 'Lønindtægt',  Interest : 'Udvikling' },
-  { Id:2, AmountWithYearVisible : false,   Principal : 'Lønindtægt',  Interest : 'Udvikling' },
-  { Id:3, AmountWithYearVisible : false,   Principal : 'Lønindtægt',  Interest : 'Udvikling' },
-]

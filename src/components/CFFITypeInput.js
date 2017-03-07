@@ -17,10 +17,10 @@ class CFFITypeInput extends Component {
 
     render() {
         return (
-          <div className = "form-group" >
+          <div className = "form-group input-sm" >
             <div className="col-sm-2" >Type</div>
             <div className = "col-sm-6">
-              <select placeholder="CFFI type" className="form-control" onChange={this.handleChange} value={this.props.cffiType}>
+              <select placeholder="CFFI type" className="form-control input-sm" onChange={this.handleChange} value={this.props.cffiType}>
               <option value="1">Indtægter</option>
               <option value="2">Formue med opsparing</option>
               <option value="3">AnnuitetsLån</option>

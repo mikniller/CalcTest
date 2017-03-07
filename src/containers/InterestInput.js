@@ -17,10 +17,10 @@ class InterestInput extends Component {
 
   render() {
     return (
-      <div className="form-group">
+      <div className="form-group input-sm">
           <div className="col-sm-2">{this.props.CFFIType.Interest}</div>
-          <div className="col-sm-4">
-              <input placeholder="år" value={this.props.interest} onChange={this.handleInterestChange} type="number" id="formHorizontalRente" className="form-control"/>
+          <div className="col-sm-2">
+              <input placeholder="år" value={this.props.interest} onChange={this.handleInterestChange} type="number" id="formHorizontalRente" className="form-control input-sm"/>
           </div>
       </div>
      )}

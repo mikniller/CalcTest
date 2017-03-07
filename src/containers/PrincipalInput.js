@@ -15,10 +15,10 @@ class PrincipalInput extends Component {
     render() {
         const {CFFIType} = this.props;
         return (
-            <div className="form-group">
+            <div className="form-group input-sm">
                 <div className="col-sm-2">{CFFIType.Principal}</div>
-                <div className="col-sm-4">
-                    <input placeholder="år" value={this.props.principal} onChange={this.handleChange} type="number" id="formHorizontalPrincipal" className="form-control"/>
+                <div className="col-sm-2">
+                    <input placeholder="år" value={this.props.principal} onChange={this.handleChange} type="number" id="formHorizontalPrincipal" className="form-control input-sm"/>
                 </div>
             </div>
         );

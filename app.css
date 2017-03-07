@@ -54,3 +54,7 @@ textarea {
 .panel-default > .panel-heading-custom {
  height:50px;
 }
+
+.form-group-close {
+  margin-bottom:1px !important;
+}

@@ -1,27 +1,29 @@
 import ActionTypes from '../constants/ActionTypes'
-import {
-    GetCFFIData
-} from '../constants/CFFIConstants'
+import AppConstants from '../constants/AppConstants'
+import { GetCFFIData } from '../constants/CFFIConstants'
+import _ from 'lodash';
 
 const inputData = {
     CFFIType: 1,
     from: 2016,
     to: 2056,
     principal: 300000,
+    interestSeries: [{amount:2, year:2016,  key :_.uniqueId()},{amount:3, year:2017,  key :_.uniqueId()}],
     interest: 2,
     amountYears: [{
         amount: 1000,
         year: 2016,
-        key: 990
+        key :_.uniqueId()
+
     }, {
         amount: 5000,
         year: 2020,
-        key: 991
+        key :_.uniqueId()
+
     }]
 };
 
 const grafData = generateSomeData(2016,2056,300000,2);
-
 
 function generateSomeData(from,to,principal,interest) {
 
@@ -32,7 +34,7 @@ function generateSomeData(from,to,principal,interest) {
       principal = principal +int;
       inte.push([Date.UTC(i, 1, 1),principal,int,0]);
   }
-return inte;
+  return inte;
 
 }
 
@@ -43,75 +45,97 @@ export const calculationData = {
     selectedCffi: GetCFFIData(inputData.CFFIType)
 }
 
-export default function yearReducer(state = calculationData, action) {
-    var newState = Object.assign({}, state);
-    switch (action.type) {
-        case ActionTypes.SET_FROM:
-            newState = Object.assign({}, state);
-            newState.input.from = action.year;
-            break;
-        case ActionTypes.SET_TO:
-            newState = Object.assign({}, state);
-            newState.input.to = action.year;
-            break;
-        case ActionTypes.SET_INTEREST:
-            newState = Object.assign({}, state);
-            newState.input.interest = action.interest;
-            break;
-        case ActionTypes.SET_PRINCIPAL:
-            newState = Object.assign({}, state);
-            newState.input.principal = action.principal;
-            break;
-        case ActionTypes.SET_AMOUNTYEAR_YEAR:
-            newState = Object.assign({}, state);
-            newState.input.amountYears = newState.input.amountYears.slice();
-            newState.input.amountYears[action.index].year = action.year;
-            break;
-        case ActionTypes.SET_AMOUNTYEAR_VALUE:
-            newState = Object.assign({}, state);
-            newState.input.amountYears = newState.input.amountYears.slice();
-            newState.input.amountYears[action.index].amount = action.amount;
-            break;
-        case ActionTypes.ADD_AMOUNTYEAR:
-            newState = Object.assign({}, state);
-            let idx = state.input.amountYears.length;
-            let prev = newState.input.amountYears[idx - 1];
-            newState.input.amountYears = newState.input.amountYears.slice();
-            newState.input.amountYears.push({
-                amount: prev.amount,
-                year: prev.year + 1,
-                key: 99 + idx
-            });
-            break;
-        case ActionTypes.DELETE_AMOUNTYEAR:
-            newState = Object.assign({}, state);
-            newState.input.amountYears = newState.input.amountYears.slice();
-            newState.input.amountYears.splice(action.index, 1);
-            break;
-        case ActionTypes.SET_TYPE:
-            console.log(state.input);
-            var inp = { ...state.input,
-                CFFIType: Number(action.CFFIType)
-            };
 
-            var newState = { ...state,
-                input: inp,
-                selectedCffi: GetCFFIData(action.CFFIType)
-            };
-            console.log(newState.input);
+
+export default function yearReducer(state = calculationData, action) {
+    let newState = state;
+    switch (action.type) {
+
+        case ActionTypes.SET_FROM:
+            var inp = { ...state.input,from: Number(action.year) };
+            newState = { ...state,input: inp};
+            break;
+
+        case ActionTypes.SET_TO:
+            var inp = { ...state.input,to: Number(action.year) };
+            newState = { ...state,input: inp};
+            break;
+
+        case ActionTypes.SET_INTEREST:
+            var inp = { ...state.input,interest: Number(action.interest) };
+            newState = { ...state,input: inp};
+            break;
+
+        case ActionTypes.SET_PRINCIPAL:
+            var inp = { ...state.input,principal: Number(action.principal) };
+            newState = { ...state,input: inp};
+            break;
+
+        case ActionTypes.SET_AMOUNTYEAR_YEAR:
+            if(action.elementType==AppConstants.AMOUNT_YEAR_INTEREST) {
+              let newIS=state.input.interestSeries.slice();
+              newIS[action.index].year=Number(action.year);
+              newState = { ...state,...state.input,interestSeries : newIS };
+            }
+            else if(action.elementType==AppConstants.AMOUNT_YEAR_PRINCIPAL) {
+              let newAY=state.input.amountYears.slice();
+              newAY[action.index].year=Number(action.year);
+              newState = { ...state,...state.input,amountYears : newAY };
+            }
+            break;
+
+        case ActionTypes.SET_AMOUNTYEAR_VALUE:
+            if(action.elementType==AppConstants.AMOUNT_YEAR_INTEREST) {
+              let newIS=state.input.interestSeries.slice();
+              newIS[action.index].amount=Number(action.amount);
+              newState = { ...state,...state.input,interestSeries : newIS };
+            }
+            else if(action.elementType==AppConstants.AMOUNT_YEAR_PRINCIPAL) {
+              let newAY=state.input.amountYears.slice();
+              newAY[action.index].amount=Number(action.amount);
+              newState = { ...state,...state.input,amountYears : newAY };
+            }
+            break;
+
+        case ActionTypes.ADD_AMOUNTYEAR:
+            if(action.elementType==AppConstants.AMOUNT_YEAR_INTEREST) {
+              let le = state.input.interestSeries[state.input.interestSeries.length-1];
+              let newIS=state.input.interestSeries.slice();
+              newIS.push({amount: le.amount, year:Number( le.year ) + 1,key:_.uniqueId() });
+              var inp = { ...state.input,interestSeries : newIS };
+            }
+            else if(action.elementType==AppConstants.AMOUNT_YEAR_PRINCIPAL) {
+              let le = state.input.amountYears[state.input.amountYears.length-1];
+              let newAY=state.input.amountYears.slice();
+              newAY.push({amount: le.amount, year:Number( le.year ) + 1,key:_.uniqueId() });
+              var inp = { ...state.input,amountYears : newAY };
+            }
+            newState = { ...state,input: inp};
+            break;
+
+        case ActionTypes.DELETE_AMOUNTYEAR:
+            if(action.elementType==AppConstants.AMOUNT_YEAR_INTEREST) {
+              newState = { ...state,...state.input,interestSeries : state.input.interestSeries.splice(action.index, 1) };
+            }
+            else if(action.elementType==AppConstants.AMOUNT_YEAR_PRINCIPAL) {
+                newState = { ...state,...state.input,amountYears : state.input.amountYears.splice(action.index, 1) };
+            }
+            break;
+
+        case ActionTypes.SET_TYPE:
+            var inp = { ...state.input, CFFIType: Number(action.CFFIType) };
+            newState = { ...state, input: inp,selectedCffi: GetCFFIData(action.CFFIType)};
+
             break;
         case ActionTypes.UPDATE_DATA:
-
-            newState = Object.assign({}, state);
-            newState.data = action.data;
             var ret = [];
             action.data.map(function(item) {
                 ret.push([Date.UTC(item.Year, 1, 1), item.Amount, item.Interest,item.Instalment]);
             });
-            newState.data = ret;
+            newState = { ...state, data: ret};
             break;
     }
-
+    console.log('State changed',newState);
     return newState;
 
 }

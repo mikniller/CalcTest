@@ -28,10 +28,10 @@ class YearInput extends Component {
 
     render() {
         return (
-          <div className = "form-group">
+          <div className = "form-group input-sm">
             <div className="col-sm-2">  {this.props.yearLabel}</div>
             <div className = "col-sm-4">
-              <input placeholder="år"  value={this.getValue()} onChange={this.handleYearChange} type="number" id="formHorizontalYear" className="form-control" />
+              <input placeholder="år"  value={this.getValue()} onChange={this.handleYearChange} type="number" id="formHorizontalYear" className="form-control input-sm" />
               </div>
            </div>
         );

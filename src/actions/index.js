@@ -1,5 +1,6 @@
 import ActionTypes from '../constants/ActionTypes'
 
+
 export const setFrom = (year) => {
   return {
   type:ActionTypes.SET_FROM,
@@ -28,33 +29,37 @@ export const setPrincipal = (principal) => {
   }
 }
 
-export const setAmountYearYear = (year,index) => {
+export const setAmountYearYear = (year,index,elementType) => {
   return {
   type:ActionTypes.SET_AMOUNTYEAR_YEAR,
     year,
-    index
+    index,
+    elementType
   }
 }
 
-export const setAmountYearValue = (amount,index) => {
+export const setAmountYearValue = (amount,index,elementType) => {
   return {
   type:ActionTypes.SET_AMOUNTYEAR_VALUE,
     amount,
-    index
+    index,
+    elementType
 
   }
 }
 
-export const addYearAmount = () => {
+export const addYearAmount = (elementType) => {
   return {
-  type:ActionTypes.ADD_AMOUNTYEAR
+  type:ActionTypes.ADD_AMOUNTYEAR,
+  elementType
   }
 }
 
-export const deleteYearAmount = (index) => {
+export const deleteYearAmount = (index,elementType) => {
   return {
   type:ActionTypes.DELETE_AMOUNTYEAR,
-    index
+    index,
+    elementType
 
   }
 }
