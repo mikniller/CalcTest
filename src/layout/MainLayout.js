@@ -29,6 +29,16 @@ class MainLayout extends React.Component {
                                     <CompoundInputData/>
                                 </div>
                             </div>
+                             <div className="panel panel-default">
+                                <div className="panel-heading panel-heading-custom">Profil</div>
+                                <div className="panel-body">
+                                    <ul>
+                                        <li>Alder : 25</li>
+                                        <li>Pensionsalder : 67 (2059)</li>
+                                        <li>Død : 77 (2069)</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-md-6">
 

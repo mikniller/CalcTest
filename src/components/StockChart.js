@@ -1,18 +1,9 @@
-import React, {
-    Component
-} from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {
-    connect
-} from 'react-redux';
+import {connect} from 'react-redux';
 import Highcharts from 'highcharts';
 import HighStock from 'highcharts/highstock';
-import {
-    testData
-} from '../reducers';
-
-
-
+import {testData} from '../reducers';
 
 export default class StockChart extends Component {
     constructor(props) {
@@ -45,9 +36,9 @@ export default class StockChart extends Component {
 
     // When the DOM is ready, create the chart.
     componentDidMount() {
-      console.log(this.props);
-        // Extend Highcharts with modules
-        // Set container which the chart should render to.
+        console.log(this.props);
+        // Extend Highcharts with modules Set container which the chart should render
+        // to.
         option2.series[0].data = this.preparePrincipal(this.props.chartData);
         option2.series[1].data = this.prepareInterest(this.props.chartData);
 
@@ -55,31 +46,56 @@ export default class StockChart extends Component {
         option2.series[1].name = this.props.selCFFI.Interest;
         option2.yAxis[0].title.text = this.props.selCFFI.Principal;
         option2.yAxis[1].title.text = this.props.selCFFI.Interest;
-        option2.title.text = this.props.selCFFI.Principal;
+        option2.title.text = '';
 
-
-        this.chart = new HighStock.StockChart(
-            this.props.container,
-            option2
-        );
+        this.chart = new HighStock.StockChart(this.props.container, option2);
     }
 
-    // Set container which the chart should render to.
-    //Destroy chart before unmount.
+    // Set container which the chart should render to. Destroy chart before unmount.
     componentWillUnmount() {
-        this.chart.destroy();
+        this
+            .chart
+            .destroy();
     }
     //Create the div which the chart will be rendered to.
     render() {
         if (typeof this.chart !== 'undefined') {
-            this.chart.series[0].update({
-                data: this.props.chartData
-            });
-            this.chart.redraw();
+            this
+                .chart
+                .series[0]
+                .update({
+                    data: this.preparePrincipal(this.props.chartData),
+                    name: this.props.selCFFI.Principal
+                });
+            this
+                .chart
+                .series[1]
+                .update({
+                    data: this.prepareInterest(this.props.chartData),
+                    name: this.props.selCFFI.Interest
+                });
+            this
+                .chart
+                .yAxis[0]
+                .update({
+                    title: {
+                        text: this.props.selCFFI.Principal
+                    }
+                });
+
+            this
+                .chart
+                .yAxis[1]
+                .update({
+                    title: {
+                        text: this.props.selCFFI.Interest
+                    }
+                });
+            this
+                .chart
+                .redraw();
         }
-        return React.createElement('div', {
-            id: this.props.container
-        });
+        return React.createElement('div', {id: this.props.container});
     }
 };
 
@@ -102,28 +118,28 @@ var option2 = {
         split: true
     },
     navigator: {
-           enabled: false
-       },
-    yAxis: [{
-            labels: {
-                align: 'right',
-                x: -3
-            },
-            title: {
-                text: 'Beløb',
-            },
-            opposite: false,
-            gridLineDashStyle: 'longdash',
-            height: '60%',
-            lineWidth: 2
-        },
+        enabled: false
+    },
+    yAxis: [
         {
             labels: {
                 align: 'right',
                 x: -3
             },
             title: {
-                text: 'Rente',
+                text: 'Beløb'
+            },
+            opposite: false,
+            gridLineDashStyle: 'longdash',
+            height: '60%',
+            lineWidth: 2
+        }, {
+            labels: {
+                align: 'right',
+                x: -3
+            },
+            title: {
+                text: 'Rente'
             },
             opposite: false,
             gridLineDashStyle: 'longdash',
@@ -134,7 +150,8 @@ var option2 = {
         }
     ],
 
-    series: [{
+    series: [
+        {
             name: 'Beløb',
             //          type: 'area',
             marker: {
@@ -152,8 +169,19 @@ var option2 = {
                     y2: 1
                 },
                 stops: [
-                    [0, Highcharts.getOptions().colors[0]],
-                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    [
+                        0,
+                        Highcharts
+                            .getOptions()
+                            .colors[0]
+                    ],
+                    [
+                        1,
+                        Highcharts
+                            .Color(Highcharts.getOptions().colors[0])
+                            .setOpacity(0)
+                            .get('rgba')
+                    ]
                 ]
             }
         }, {
@@ -166,9 +194,8 @@ var option2 = {
             shadow: true,
             //      type:'column',
             data: [],
-            yAxis: 1,
+            yAxis: 1
         }
 
-
-    ],
+    ]
 }

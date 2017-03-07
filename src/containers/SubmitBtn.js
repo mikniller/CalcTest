@@ -17,8 +17,8 @@ class SubmitBtn extends Component{
      disp(toogleFetchStatus(true));
      $.ajax({
         method: "POST",
-        // url: "http://Calculator.localhost/Api/Values",
-        url: "http://localhost:54187/Api/Values",
+        //url: "http://Calculator.localhost/Api/Values",
+        url: "http://localhost:5000/Api/Values",
         data:this.props.input,
         dataType: "json",
           done : function(result) {

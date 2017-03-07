@@ -106,7 +106,7 @@ export default function yearReducer(state = calculationData, action) {
             newState.data = action.data;
             var ret = [];
             action.data.map(function(item) {
-                ret.push([Date.UTC(item.Year, 1, 1), item.Amount, item.Interest]);
+                ret.push([Date.UTC(item.Year, 1, 1), item.Amount, item.Interest,item.Instalment]);
             });
             newState.data = ret;
             break;
